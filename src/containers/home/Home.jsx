@@ -1,6 +1,15 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {
+  Card as CardRS,
+  CardBody,
+  CardImg,
+  CardTitle,
+  CardSubtitle,
+  Col,
+  Button
+} from "reactstrap";
 
 const Home = () => {
   const [receta, setReceta] = useState("");
@@ -87,10 +96,22 @@ const Home = () => {
         ))}
       </ul>
       <button onClick={handlerGuardar}>Guardar receta</button>
-   
+
       {JSON.stringify(recetas)}
 
-
+      <Col lg="3">
+        {recetas.map(receta => (
+          <CardRS key={receta.id}>
+            <CardBody>
+              <CardImg top src={receta.img_url} />
+              <CardTitle>{receta.title}</CardTitle>
+              {receta.description.map(ingrediente => (
+                <CardSubtitle>{ingrediente.nombre + "  " + ingrediente.descripcion }</CardSubtitle>
+              ))}
+            </CardBody>
+          </CardRS>
+        ))}
+      </Col>
     </div>
   );
 };
