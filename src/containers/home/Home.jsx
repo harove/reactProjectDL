@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { findAll } from '../../client/post.client';
 import {
   Card as CardRS,
   CardBody,
@@ -20,9 +21,10 @@ const Home = () => {
   const [recetas, setRecetas] = useState([]);
 
   useEffect(() => {
-    axios("http://localhost:3333/api/post")
+      findAll()
       .then(function(response) {
-        const rs = response.data.data;
+        //debugger
+        const rs = response.data;
         const nlrs = rs.map(r => ({
           ...r,
           description: JSON.parse(r.description)
