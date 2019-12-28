@@ -20,7 +20,6 @@ const reducer = (prevState = initialState, action) => {
                 loading: true,
             };
         case RECIPE_FIND_ALL_OK:
-            //recipes array should arrive in payload
             return {
                 ...prevState,
                 loading: false,
@@ -29,7 +28,6 @@ const reducer = (prevState = initialState, action) => {
                 data: action.payload,
             };
         case RECIPE_FIND_ALL_NOK:
-            //error messaje should arrive in payload
             return {
                 ...prevState,
                 loading: false,

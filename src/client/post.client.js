@@ -4,6 +4,10 @@ export const findAll = () => {
     const token = localStorage.getItem('token');
     return fetch(`${API_HOST}/api/post`, {
         method: 'GET', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     }).then(res => res.json())
 }
 

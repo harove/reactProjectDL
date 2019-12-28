@@ -9,9 +9,10 @@ import './App.css';
 import Home from './containers/home/Home';
 import Login from './containers/login/Login';
 import PrivateHome from './containers/private-home/PrivateHome';
-import NotFound from './containers/not-found/NotFound';
 import PrivateSaveUser from './containers/private-save-user/PrivateSaveUser';
-
+import PrivateHomeRecipe from './containers/private-home-recipe/PrivateHomeRecipe';
+import PrivateSaveRecipe from './containers/private-save-recipe/PrivateSaveRecipe';
+import NotFound from './containers/not-found/NotFound';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path="/login" component={Login}/>
             <PrivateRoute exact path="/private/home" component={PrivateHome} />
             <PrivateRoute path="/private/home/user/create" component={PrivateSaveUser} />
+            <PrivateRoute exact path="/private/home/recipe" component={PrivateHomeRecipe} />
+            <PrivateRoute path="/private/home/recipe/create" component={PrivateSaveRecipe} /> 
             <Route component={NotFound} />
           </Switch>
         </Router>

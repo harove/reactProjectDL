@@ -1,11 +1,12 @@
 import {
-    RECIPE_FIND_ALL_START,
-    RECIPE_FIND_ALL_OK,
-    RECIPE_FIND_ALL_NOK,
+    RECIPE_SAVE_START,
+    RECIPE_SAVE_OK,
+    RECIPE_SAVE_NOK,
+    RECIPE_SAVE_VOID,
 } from './const';
 
 const initialState = {
-    data: [],
+    data: {},
     loading: false,
     error: null,
     success: null,
@@ -14,13 +15,18 @@ const initialState = {
 
 const reducer = (prevState = initialState, action) => {
     switch (action.type) {
-        case RECIPE_FIND_ALL_START:
+        case RECIPE_SAVE_START:
             return {
                 ...prevState,
                 loading: true,
+                data: {},
             };
-        case RECIPE_FIND_ALL_OK:
-            //recipes array should arrive in payload
+        case RECIPE_SAVE_VOID:
+            return {
+                ...prevState,
+                data: {},
+            };
+        case RECIPE_SAVE_OK:
             return {
                 ...prevState,
                 loading: false,
@@ -28,8 +34,7 @@ const reducer = (prevState = initialState, action) => {
                 error: false,
                 data: action.payload,
             };
-        case RECIPE_FIND_ALL_NOK:
-            //error messaje should arrive in payload
+        case RECIPE_SAVE_NOK:
             return {
                 ...prevState,
                 loading: false,
