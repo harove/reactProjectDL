@@ -13,12 +13,14 @@ import PrivateSaveUser from './containers/private-save-user/PrivateSaveUser';
 import PrivateHomeRecipe from './containers/private-home-recipe/PrivateHomeRecipe';
 import PrivateSaveRecipe from './containers/private-save-recipe/PrivateSaveRecipe';
 import NotFound from './containers/not-found/NotFound';
+import Header from "./components/header/Header";
 
 function App() {
   return (
     <div className="app">
       <Provider store={store}>
         <Router>
+        <Header/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login}/>

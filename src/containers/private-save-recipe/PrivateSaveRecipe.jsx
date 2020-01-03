@@ -22,6 +22,8 @@ const PrivateSaveRecipe = props => {
   const [image_url, setImage_url] = useState("");
   const dispatch = useDispatch();
   const recipeSaveModule = useSelector(store => store.recipe.recipeSave);
+  const [idIng, setIdIng] = useState(0);
+
   useEffect(() => {
     dispatch({
       type: "RECIPE_SAVE_VOID",
@@ -51,9 +53,11 @@ const PrivateSaveRecipe = props => {
 
   const handlerAddIng = event => {
     const ln = l;
+    setIdIng(idIng + 1);
     ln.push({
+      id: idIng,  
       nombre: ing,
-      descripcion: ingDe
+      descripcion: ingDe,
     });
     setL(ln);
     setIng("");
