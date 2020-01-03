@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import {  useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { findAll } from '../../client/post.client';
+import { findAllAsyncActionCreator } from '../../store/modules/recipe/actions';
 import {
   Card as CardRS,
   CardBody,
@@ -13,6 +15,13 @@ import {
 } from "reactstrap";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const recipeModule = useSelector(store => store.recipe.recipes);
+
+  useEffect(() => {
+    dispatch(findAllAsyncActionCreator());
+}, []);
+
   const [receta, setReceta] = useState("");
   const [ing, setIng] = useState("");
   const [ingDe, setIngDe] = useState("");

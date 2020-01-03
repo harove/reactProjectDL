@@ -27,18 +27,46 @@ const findAllNokActionCreator = (errorMessage) => ({
     payload: errorMessage,
 });
 
+
+
+const descriptionToObj = (obj) => {
+
+    if(obj === null) return [];
+    try {
+        return JSON.parse(obj);
+    } catch (e) {
+        // return obj
+        return []
+    }
+}
+
 export const findAllAsyncActionCreator = () => {
     return (dispatch, getStore) => {
+  
         dispatch(findAllStartActionCreator());
         findAll()
             .catch(error => {
                 dispatch(findAllNokActionCreator('Error:', error))
+          
             })
             .then(response => {
+          
                 if (response.message !== 'success') {
+               
                     dispatch(findAllNokActionCreator('Error: generico'))
                 } else {
-                    dispatch(findAllOkActionCreator(response.data))
+                 
+                    const nl = response.data.map(item => {
+                        
+                        const desc = descriptionToObj(item.description);
+    
+                        return ({
+                            ...item,
+                            description: desc,
+                        });
+                    })
+           
+                    dispatch(findAllOkActionCreator(nl))
                 }
             });
     }
