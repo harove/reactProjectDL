@@ -20,7 +20,7 @@ const LoginForm = (props) => {
 
     useEffect(() => {
         if(store.auth.isLogin) {
-            props.history.push('/private/home');
+            props.history.push('/private/home/recipe');
         }
     }, [store.auth.isLogin, props]);
 
@@ -40,7 +40,7 @@ const LoginForm = (props) => {
                 />
                 <button>Login</button>
                 <pre>
-                    {JSON.stringify(store, undefined, 2)}
+                    {/*JSON.stringify(store, undefined, 2)*/}
                 </pre>
             </form>
         </div>

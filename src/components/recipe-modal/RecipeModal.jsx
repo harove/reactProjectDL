@@ -1,12 +1,13 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-const RecipeModal = (props) => {
-  const {
-    user,
-  } = props;
+const RecipeModal = props => {
+  const { recipe } = props;
+
+  const desc = JSON.parse(recipe.data.description);
+
 
   const [modal, setModal] = useState(true);
 
@@ -14,16 +15,28 @@ const RecipeModal = (props) => {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{user.data.id} {user.data.name}</ModalHeader>
-        <ModalBody>
-          {user.data.email}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
-        </ModalFooter>
-      </Modal>
+      <ModalHeader toggle={toggle}>
+        {recipe.data.id} {recipe.data.title}{" "}
+      </ModalHeader>
+      <ModalBody>
+        <ul>
+          {desc.map(ingDetail => (
+            <li>
+              <p> {ingDetail.nombre}</p>
+            </li>
+          ))}
+        </ul>
+      </ModalBody>
+      <ModalFooter>
+        <Button color="primary" onClick={toggle}>
+          Do Something
+        </Button>{" "}
+        <Button color="secondary" onClick={toggle}>
+          Cancel
+        </Button>
+      </ModalFooter>
+    </Modal>
   );
-}
+};
 
 export default RecipeModal;

@@ -79,10 +79,12 @@ const Home = () => {
 
   return (
     <Container className="Home">
+              <Header/>
       {/*JSON.stringify(recipeModule)*/}
       <Row>
-        <Col lg="3">
+  
           {recetas.map(receta => (
+      <Col lg="3">
             <CardRS key={receta.id}>
               <CardBody>
                 <CardImg top src={receta.image_url} />
@@ -94,8 +96,9 @@ const Home = () => {
                 ))}
               </CardBody>
             </CardRS>
+            </Col>
           ))}
-        </Col>
+
       </Row>
     </Container>
   );

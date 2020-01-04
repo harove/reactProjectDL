@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Button, Table } from "reactstrap";
 import RecipeModal from "../../components/recipe-modal/RecipeModal";
+import HeaderPrivate from "../../components/header-private/HeaderPrivate"
 
 import { logoutActionCreator } from "../../store/modules/auth/actions";
 import {
@@ -37,9 +38,9 @@ const PrivateHome = () => {
 
   return (
     <Container className="private-home-recipe">
-      Private Home
-      <Link to="/private/home/recipe/create">Crear</Link>
-      <Button onClick={handlerLogout}>Cerrar sesión</Button>
+      <HeaderPrivate/>
+      {/* <Link to="/private/home/recipe/create">Crear</Link> */}
+      {/* <Button onClick={handlerLogout}>Cerrar sesión</Button> */}
       {/*JSON.stringify(recipeModule)*/}
       <Table striped hover responsive>
         <thead>
