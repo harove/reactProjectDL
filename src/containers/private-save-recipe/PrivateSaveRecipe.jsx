@@ -12,6 +12,8 @@ import {
   Button
 } from "reactstrap";
 import { saveAsyncActionCreator } from "../../store/modules/recipe/actions";
+import HeaderPrivate from "../../components/header-private/HeaderPrivate"
+
 
 const PrivateSaveRecipe = props => {
   const [title, setTitle] = useState("");
@@ -73,6 +75,7 @@ const PrivateSaveRecipe = props => {
   return (
     <div className="private-save-recipe">
       <Container>
+        <HeaderPrivate/>
         <Row>
           <Col>
             <form onSubmit={handlerSave}>
@@ -139,7 +142,7 @@ const PrivateSaveRecipe = props => {
           </Col>
         </Row>
       </Container>
-      {JSON.stringify(recipeSaveModule)}
+      {/* {JSON.stringify(recipeSaveModule)} */}
     </div>
   );
 };

@@ -22,6 +22,19 @@ export const findById = (id) => {
     }).then(res => res.json())
 };
 
+export const deleteFetch = (recipe) => {
+    const token = localStorage.getItem('token');
+    return fetch(`${API_HOST}/api/post/${recipe}`, {
+        method: 'DELETE', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }).then(res => res.json())
+};
+
+
+
 /*
 email,
 password
@@ -38,3 +51,4 @@ export const save = (recipe) => {
         }
     }).then(res => res.json())
 };
+

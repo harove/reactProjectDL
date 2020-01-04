@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Button, Table } from "reactstrap";
 import RecipeModal from "../../components/recipe-modal/RecipeModal";
-import HeaderPrivate from "../../components/header-private/HeaderPrivate"
+import HeaderPrivate from "../../components/header-private/HeaderPrivate";
+import { deleteFetch } from "../../client/post.client";
 
 import { logoutActionCreator } from "../../store/modules/auth/actions";
 import {
   findAllAsyncActionCreator,
-  findByIdAsyncActionCreator
+  findByIdAsyncActionCreator,
+  deleteAsyncActionCreator,
+  
 } from "../../store/modules/recipe/actions";
 
 const PrivateHome = () => {
@@ -19,12 +22,9 @@ const PrivateHome = () => {
     dispatch(findAllAsyncActionCreator());
   }, []);
 
-//   useEffect(() => {
-//     const descriptionOk = JSON.parse(recipeModule.data)
-//   }, []);
-
-
-
+  //   useEffect(() => {
+  //     const descriptionOk = JSON.parse(recipeModule.data)
+  //   }, []);
 
   const handlerLogout = () => {
     dispatch(logoutActionCreator());
@@ -32,13 +32,20 @@ const PrivateHome = () => {
 
   const handlerFindById = recipe => {
     return event => {
+
       dispatch(findByIdAsyncActionCreator(recipe.id));
+    };
+  };
+
+  const handlerDelete = recipe => {
+    return event => {
+      dispatch(deleteAsyncActionCreator(recipe));
     };
   };
 
   return (
     <Container className="private-home-recipe">
-      <HeaderPrivate/>
+      <HeaderPrivate />
       {/* <Link to="/private/home/recipe/create">Crear</Link> */}
       {/* <Button onClick={handlerLogout}>Cerrar sesión</Button> */}
       {/*JSON.stringify(recipeModule)*/}
@@ -50,7 +57,8 @@ const PrivateHome = () => {
             <th>Ingredient</th>
             <th>ingredient detail</th>
             <th>Image_url</th>
-            <th>Acciones</th>
+            <th>ver</th>
+            <th>delete</th>
           </tr>
         </thead>
         <tbody>
@@ -63,6 +71,9 @@ const PrivateHome = () => {
               <td>{recipe.image_url}</td>
               <td>
                 <Button onClick={handlerFindById(recipe)}>Ver</Button>
+              </td>
+              <td>
+                <Button onClick={handlerDelete(recipe)}>Delete</Button>
               </td>
             </tr>
           ))}

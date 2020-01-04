@@ -1,9 +1,12 @@
-import { findAll, findById, save } from '../../../client/post.client';
+import { findAll, findById, save, deleteFetch} from '../../../client/post.client';
 
 import {
     RECIPE_SAVE_NOK,
     RECIPE_SAVE_OK,
     RECIPE_SAVE_START,
+    RECIPE_DELETE_NOK,
+    RECIPE_DELETE_OK,
+    RECIPE_DELETE_START,
     RECIPE_FIND_ALL_NOK,
     RECIPE_FIND_ALL_OK,
     RECIPE_FIND_ALL_START,
@@ -137,3 +140,37 @@ export const saveAsyncActionCreator = (recipe) => {
             });
     }
 }
+
+
+const deleteStartActionCreator = () => ({
+    type: RECIPE_DELETE_START,
+    payload: null,
+});
+
+const deleteOkActionCreator = (data) => ({
+    type: RECIPE_DELETE_OK,
+    payload: data.post.id,
+});
+
+const deleteNokActionCreator = (errorMessage) => ({
+    type: RECIPE_DELETE_NOK,
+    payload: errorMessage,
+});
+
+export const deleteAsyncActionCreator = (recipe) => {
+    return (dispatch, getStore) => {
+        dispatch(deleteStartActionCreator());
+        deleteFetch(recipe.id)
+            .catch(error => {
+                dispatch(deleteNokActionCreator('Error:', error))
+            })
+            .then(response => {
+                if (response.message !== 'delete') {
+                    dispatch(deleteNokActionCreator('Error: generico'))
+                } else {
+                    dispatch(deleteOkActionCreator(response.data))
+                }
+            });
+    }
+}
+
